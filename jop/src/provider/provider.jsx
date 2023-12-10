@@ -5,42 +5,28 @@ const initialdata = {
     sum: 0
 }
 
-/*const reducer = ({...state}, action) => {
+const reducer = ({...state}, action) => {
     //console.log(action.payload);
-    const [count, stool, table] = action.payload;
+    
     //console.log(tempstate)
     switch (action.type) {
         case "eat": {
+        const [count, stool, table] = action.payload;
         state.tables[table][stool] += 1;
         state.sum += 1
           return  {...state}
+        }
+        case "add_table": {
+          const newTable = [0,0,0,0]
+          state.tables.push(newTable)
+          return {...state}
         }
         default:{
             return {...state}
         }
     }
-}*/
-const reducer = (state, action) => {
-    const [count, stool, table] = action.payload;
-    switch (action.type) {
-      case "eat": {
-        console.log(state.sum);
-        return {
-          ...state,
-          tables: state.tables.map((row, i) =>
-            i === table
-              ? row.map((value, j) => (j === stool ? value + 1 : value))
-              : row
-          ),
-          sum: state.sum + 1,
-        };
-      }
-      default: {
-        
-        return state;
-      }
-    }
-  }
+}
+
 
 export const AppContext = createContext(initialdata);
 
